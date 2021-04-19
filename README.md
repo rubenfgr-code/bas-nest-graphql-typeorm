@@ -22,17 +22,24 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descripción
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este repositorio es un proyecto base con Nest, GrapHQL y TypeORM ya configurado y listo para empezar a trabajar sobre el.
+Todos los proyectos base que tengo realizados corren sobre una misma base de datos cuyo diagrama es el siguiente:
 
-## Installation
+![](img/db-diagram.svg)
+
+Esta base de datos esta preparada para crear un sistema de autorización de usuarios sobre colecciones o tablas. El objetivo sería, obtener los datos de la tabla de "permission" y guardarlos en cache para poder realizar comprobaciones lo más optimas posibles cada vez que un usuario accede a un punto final de API. Por ejemplo, un usuario tiene acceso CRUD sobre la tabla "Profile", cuando este accede al punto final se debe comprar el ID del rol junto al nombre de la colección|tabla (forman la clave primaria de la tabla de permisos) con los datos cacheados. Estos puntos finales tienen que tener asignados los permisos CRUD necesarios para realizar la comprobación.
+
+Otra opción para la autorización podría ser un enumerado de roles estáticos en código y base de datos que deben asignarse a los usuarios. Agregar roles permitidos a puntos finales de API.
+
+## Instalación
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Iniciando la app
 
 ```bash
 # development
@@ -45,7 +52,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Pruebas
 
 ```bash
 # unit tests
@@ -58,16 +65,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Licencia
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+[MIT](LICENSE)
