@@ -39,6 +39,20 @@ Otra opción para la autorización podría ser un enumerado de roles estáticos 
 $ npm install
 ```
 
+## Iniciar la base de datos
+
+>Requisitos: docker y docker-compose
+
+El fichero `docker/docker-compose-db.yml` esta preparado para lanzar dos contenedores, uno para mariadb y otro para adminer. Estan configurados en los puertos:
+
+- mariadb: 8890
+- adminer: 8891 `http://localhost:8891`
+
+```bash
+# Iniciar los contenedores
+sudo docker-compose -f docker/docker-compose-db.yml up -d
+```
+
 ## Iniciando la app
 
 ```bash
