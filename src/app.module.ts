@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 import { InjectConnection, TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,6 +14,17 @@ import configuration, { EnvironmentVariables } from './config/configuration';
       isGlobal: true,
       load: [configuration],
       cache: true,
+    }),
+    GraphQLModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService<EnvironmentVariables>) => ({
+        autoSchemaFile: join(
+          process.cwd(),
+          configService.get<string>('graphql.schemafile'),
+        ),
+        sortSchema: configService.get<boolean>('graphql.sort_schema'),
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

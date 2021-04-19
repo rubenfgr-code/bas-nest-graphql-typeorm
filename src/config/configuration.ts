@@ -10,6 +10,10 @@ export default () => ({
     database: process.env.DB_DATABASE,
     synchronize: parseInt(process.env.DB_SYNCHRONIZE, 10) || 0,
   },
+  graphql: {
+    schemafile: process.env.GRAPHQL_SCHEMAFILE,
+    sort_schema: parseInt(process.env.DB_SYNCHRONIZE, 10) || 1,
+  },
 });
 
 export interface EnvironmentVariables {
@@ -22,4 +26,6 @@ export interface EnvironmentVariables {
   'db.password': string;
   'db.database': string;
   'db.synchronize': boolean;
+  'graphql.schemafile': string;
+  'graphql.sort_schema': string;
 }
