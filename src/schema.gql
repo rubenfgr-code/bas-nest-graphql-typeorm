@@ -1,0 +1,159 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Collection {
+  id: Int!
+  name: String!
+  permissions: [Permission!]!
+}
+
+input CreateCollectionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreatePermissionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateProfileInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+type Mutation {
+  createCollection(createCollectionInput: CreateCollectionInput!): Collection!
+  createPermission(createPermissionInput: CreatePermissionInput!): Permission!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  createUser(createUserInput: CreateUserInput!): User!
+  removeCollection(id: Int!): Collection!
+  removePermission(id: Int!): Permission!
+  removeProfile(id: Int!): Profile!
+  removeRole(id: Int!): Role!
+  removeUser(id: Int!): Boolean!
+  updateCollection(updateCollectionInput: UpdateCollectionInput!): Collection!
+  updatePermission(updatePermissionInput: UpdatePermissionInput!): Permission!
+  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
+  updateRole(updateRoleInput: UpdateRoleInput!): Role!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  updateUserEmail(updateUserEmailInput: UpdateUserEmailInput!): Boolean!
+  updateUserName(updateUserNameInput: UpdateUserNameInput!): Boolean!
+  updateUserPassword(updateUserPasswordInput: UpdateUserPasswordInput!): Boolean!
+}
+
+type Permission {
+  collection: Collection!
+  create: Boolean!
+  delete: Boolean!
+  read: Boolean!
+  role: Role!
+  update: Boolean!
+}
+
+type Profile {
+  birthdate: Timestamp
+  firstname: String
+  gender: Gender!
+  id: Int!
+  lastname: String
+  user: User!
+}
+
+type Query {
+  collection(id: Int!): Collection!
+  permission(id: Int!): Permission!
+  profile(id: Int!): Profile!
+  role(id: Int!): Role!
+  user(id: Int!): User!
+}
+
+type Role {
+  id: Int!
+  name: String!
+  permissions: [Permission!]!
+  users: [User!]!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+input UpdateCollectionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdatePermissionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateProfileInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateUserEmailInput {
+  id: Int!
+  newEmail: String!
+  oldEmail: String!
+}
+
+input UpdateUserInput {
+  email: String
+  id: Int!
+  name: String
+  password: String
+}
+
+input UpdateUserNameInput {
+  id: Int!
+  newName: String!
+  oldName: String!
+}
+
+input UpdateUserPasswordInput {
+  id: Int!
+  newPassword: String!
+  newPasswordVerify: String!
+  oldPassword: String!
+}
+
+type User {
+  email: String!
+  id: Int!
+  isActive: Boolean!
+  name: String!
+  password: String
+  profile: Profile!
+  role: Role!
+}

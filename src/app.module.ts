@@ -6,6 +6,12 @@ import { join } from 'path';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { Collection } from './auth/collection/entities/collection.entity';
+import { Permission } from './auth/permission/entities/permission.entity';
+import { Profile } from './auth/profile/entities/profile.entity';
+import { Role } from './auth/role/entities/role.entity';
+import { User } from './auth/user/entities/user.entity';
 import configuration, { EnvironmentVariables } from './config/configuration';
 
 @Module({
@@ -23,6 +29,9 @@ import configuration, { EnvironmentVariables } from './config/configuration';
           configService.get<string>('graphql.schemafile'),
         ),
         sortSchema: configService.get<boolean>('graphql.sort_schema'),
+        buildSchemaOptions: {
+          dateScalarMode: 'timestamp',
+        },
       }),
       inject: [ConfigService],
     }),
@@ -35,11 +44,12 @@ import configuration, { EnvironmentVariables } from './config/configuration';
         username: configService.get('db.user'),
         password: configService.get('db.password'),
         database: configService.get('db.database'),
-        entities: [],
+        entities: [User, Role, Profile, Permission, Collection],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
